@@ -89,8 +89,8 @@ public class LinkedList {
 		}
 		Node newNode = new Node(block);
 		if (size == 0) {
-			first = newNode;
 			newNode = last;
+			first = newNode;
 		}
 		if (index == 0){
 			newNode.next = this.first;
@@ -116,8 +116,8 @@ public class LinkedList {
 	public void addLast(MemoryBlock block) {
 		Node newNode = new Node(block);
 		if (size == 0) {
-			first = newNode;
 			newNode = last;
+			first = newNode;
 		} else {
 		newNode.next = last;
 		this.last = newNode;
@@ -135,8 +135,8 @@ public class LinkedList {
 	public void addFirst(MemoryBlock block) {
 		Node newNode = new Node(block);
 		if (size == 0) {
-			first = newNode;
 			newNode = last;
+			first = newNode;
 		} else {
 		newNode.next = first;
 		this.first = newNode;
