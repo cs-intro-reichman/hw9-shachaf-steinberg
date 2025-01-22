@@ -103,8 +103,7 @@ public class LinkedList {
 			newNode.next = getNode(index);
 			prev.next = newNode;
 		}
-		size++;
-		
+		size++;	
 	}
 
 	/**
@@ -119,11 +118,12 @@ public class LinkedList {
 		if (size == 0) {
 			first = newNode;
 			newNode = last;
-		}
+		} else {
 		newNode.next = last;
 		this.last = newNode;
-		size++;
 		}
+		size++;
+	}
 	
 	/**
 	 * Creates a new node that points to the given memory block, and adds it 
@@ -137,9 +137,10 @@ public class LinkedList {
 		if (size == 0) {
 			first = newNode;
 			newNode = last;
-		}
+		} else {
 		newNode.next = first;
 		this.first = newNode;
+		}
 		size++;
 	}
 	/**
