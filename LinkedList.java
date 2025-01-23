@@ -156,7 +156,7 @@ public class LinkedList {
 		Node current = first;
 		int index = 0;
 		while (current != null) {
-			if (current.block == block) {
+			if (current.block.equals(block)) {
 				return index;
 			}
 			current = current.next;
