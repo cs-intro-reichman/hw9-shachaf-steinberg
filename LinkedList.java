@@ -88,13 +88,14 @@ public class LinkedList {
 					"index must be between 0 and size");
 		}
 		Node newNode = new Node(block);
-		if (size == 0) {
-			this.last = this.first;
-		}
 		if (index == 0){
 			newNode.next = this.first;
 			this.first = newNode;
-		} else if (index == (getSize() - 1)) {
+			if (size == 0) {
+				this.last = newNode;
+				this.first = newNode;
+			}
+		} else if (index == (size)) {
 			this.last.next = newNode;
 			this.last = newNode;
 		} else {
@@ -115,7 +116,8 @@ public class LinkedList {
 	public void addLast(MemoryBlock block) {
 		Node newNode = new Node(block);
 		if (size == 0) {
-			this.last = this.first;
+			this.last = newNode;
+			this.first = newNode;
 		} else {
 		this.last.next = newNode;
 		this.last = newNode;
@@ -133,7 +135,8 @@ public class LinkedList {
 	public void addFirst(MemoryBlock block) {
 		Node newNode = new Node(block);
 		if (size == 0) {
-			this.last = this.first;
+			this.last = newNode;
+			this.first = newNode;
 		} else {
 		newNode.next = first;
 		this.first = newNode;
@@ -150,7 +153,7 @@ public class LinkedList {
 	 *         if index is negative or greater than or equal to size
 	 */
 	public MemoryBlock getBlock(int index) {
-		if (index < 0 || index > size) {
+		if (this.getSize() == 0) {
 			throw new IllegalArgumentException(
 					"index must be between 0 and size");
 		}
@@ -186,17 +189,20 @@ public class LinkedList {
 	 */
 	public void remove(Node node) {
 		int index = indexOf((node.block));
-		Node prev = getNode(index - 1);
-		Node current = getNode(index);
-		if (index == 0){
-			first = getNode(index + 1);
-		} else if (index == (getSize() - 1)) {
-			prev.next = null;
-		} else {
-			prev.next = current.next;
+		Node prev = getNode(index - 2);
+		if (size == 0) {
+		this.last = null;
 		}
+		if (this.first == node){
+			this.first = this.first.next;
+		} else if (this.last == node) {
+			prev.next = null;
+			this.last = prev;
+		} else {
+			this.getNode(index).next = node.next;
+		}
+		this.size--;
 	}
-
 
 	/**
 	 * Removes from this list the node which is located at the given index.
