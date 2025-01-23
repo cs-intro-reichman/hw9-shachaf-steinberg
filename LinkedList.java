@@ -95,14 +95,14 @@ public class LinkedList {
 			newNode.next = this.first;
 			this.first = newNode;
 		} else if (index == (getSize() - 1)) {
-			newNode.next = this.last;
+			this.last.next = newNode;
 			this.last = newNode;
 		} else {
 			Node prev = getNode(index - 1);
 			newNode.next = getNode(index);
 			prev.next = newNode;
 		}
-		size++;	
+		this.size++;	
 	}
 
 	/**
@@ -117,7 +117,7 @@ public class LinkedList {
 		if (size == 0) {
 			this.last = this.first;
 		} else {
-		newNode.next = this.last;
+		this.last.next = newNode;
 		this.last = newNode;
 		}
 		size++;
