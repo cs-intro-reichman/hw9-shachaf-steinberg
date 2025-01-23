@@ -95,6 +95,7 @@ public class LinkedList {
 			newNode.next = this.first;
 			this.first = newNode;
 		} else if (index == (getSize() - 1)) {
+			//System.out.println("last is " + this.last);
 			this.last.next = newNode;
 			this.last = newNode;
 		} else {
