@@ -113,13 +113,7 @@ public class LinkedList {
 	 *        the given memory block
 	 */
 	public void addLast(MemoryBlock block) {
-		Node newNode = new Node(block);
-		if (size == 0) {
-			this.last = this.first;
-		} else {
-		this.last.next = newNode;
-		this.last = newNode;
-		}
+		this.add(this.size, block);
 		size++;
 	}
 	
@@ -131,14 +125,7 @@ public class LinkedList {
 	 *        the given memory block
 	 */
 	public void addFirst(MemoryBlock block) {
-		Node newNode = new Node(block);
-		if (size == 0) {
-			this.last = this.first;
-		} else {
-		newNode.next = first;
-		this.first = newNode;
-		}
-		size++;
+		this.add(0, block);
 	}
 	/**
 	 * Gets the memory block located at the given index in this list.
