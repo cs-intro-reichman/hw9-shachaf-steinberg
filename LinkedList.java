@@ -188,22 +188,26 @@ public class LinkedList {
 	 *        the node that will be removed from this list
 	 */
 	public void remove(Node node) {
-		int index = indexOf((node.block));
-		Node prev = getNode(index - 2);
-		if (size == 0) {
-		this.last = null;
-		}
-		if (this.first == node){
+		Node cur = first;
+		if (this.first == node) {
 			this.first = this.first.next;
-		} else if (this.last == node) {
-			prev.next = null;
-			this.last = prev;
+			if (this.first == null) {
+				this.last = null;
+			}
 		} else {
-			this.getNode(index).next = node.next;
+			while (cur != null && cur.next != node) {
+				cur = cur.next;
+			}
+			if (cur != null) {
+				cur.next = node.next;
+				if (cur.next == null) {
+					this.last = cur;
+				}
+			}
 		}
-		this.size--;
+		size--; 
 	}
-
+		
 	/**
 	 * Removes from this list the node which is located at the given index.
 	 * 
@@ -212,16 +216,13 @@ public class LinkedList {
 	 *         if index is negative or greater than or equal to size
 	 */
 	public void remove(int index) {
-		Node prev = getNode(index - 1);
-		Node current = getNode(index);
-		if (index == 0){
-			first = getNode(index + 1);
-		} else if (index == (getSize() - 1)) {
-			prev.next = null;
-		} else {
-			prev.next = current.next;
+		if (index < 0 || index > size) {
+			throw new IllegalArgumentException(
+				"index must be between 0 and size");
 		}
-	}	
+		remove(getNode(index));
+	}
+
 
 	/**
 	 * Removes from this list the node pointing to the given memory block.
@@ -231,18 +232,14 @@ public class LinkedList {
 	 *         if the given memory block is not in this list
 	 */
 	public void remove(MemoryBlock block) {
-		int index = indexOf((block));
-		Node prev = getNode(index - 1);
-		Node current = getNode(index);
-		if (index == 0){
-			first = getNode(index + 1);
-		} else if (index == (getSize() - 1)) {
-			prev.next = null;
+		if (indexOf(block) == -1) {
+			throw new IllegalArgumentException(
+					"index must be between 0 and size");
 		} else {
-			prev.next = current.next;
-		}
+			remove(indexOf(block));
+		}	
 	}
-
+	
 
 	/**
 	 * Returns an iterator over this list, starting with the first element.
@@ -256,14 +253,15 @@ public class LinkedList {
 	 */
 	public String toString() {
 		if (size == 0) {
-			return "()";
+			return "";
 		}
-		String str = "(";
+		String str = "";
 		Node current = first;
 		while (current != null) {
 			str += current.block + " ";
 			current = current.next;
 		}
-		return "";
+		return str.substring(0, str.length() - 1) + " ";	
 	}
+
 }
